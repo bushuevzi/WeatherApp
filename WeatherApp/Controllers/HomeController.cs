@@ -18,14 +18,17 @@ namespace WeatherApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string id)
         {
-            return View();
-        }
+            // Если значение города не передано Get запросом
+            if(string.IsNullOrEmpty(id))
+                return View();
 
-        public IActionResult Privacy()
-        {
-            return View();
+
+
+            // Если город передан
+            // TODO: вместо ID подставить настоящие данные и в модели заменить модель в представлении
+            return View("Index", id);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

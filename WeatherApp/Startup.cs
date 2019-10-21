@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WeatherApp.Services;
+using WeatherApp.Services.AppService;
 
 namespace WeatherApp
 {
@@ -24,6 +26,13 @@ namespace WeatherApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            #region Внедрение зависимостей
+
+            services.AddScoped<IAppService, AppService>();
+            services.AddScoped<IWeatherService, YandexWeatherService>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
