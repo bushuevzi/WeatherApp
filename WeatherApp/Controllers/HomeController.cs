@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,9 +30,21 @@ namespace WeatherApp.Controllers
                 return View();
 
             // Если город передан получаем погоду
-            // TODO: вместо ID подставить настоящие данные и в модели заменить модель в представлении
             var weather = await _appService.GetWheatherForView(id);
             return View("Index", weather);
+        }
+
+        public IActionResult GetJson(Guid id)
+        {
+            // Создаем поток чтобы потом записать его в файл который мы передадим во фронт
+            MemoryStream memoryStream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(memoryStream);
+            
+            // Записываем в поток нашу погоду (сейчас она уже сериализованна в строку в формате JSON)
+            writer.Write(_appService.GetWeatherById(id));
+            memoryStream.Position = 0;
+
+            return File(memoryStream,"application/json");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

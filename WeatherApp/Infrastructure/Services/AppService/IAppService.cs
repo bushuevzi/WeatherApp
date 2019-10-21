@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services.AppService
@@ -14,5 +15,12 @@ namespace WeatherApp.Services.AppService
         /// <param name="city">Наименование города</param>
         /// <returns></returns>
         Task<Weather> GetWheatherForView(string city);
+
+        /// <summary>
+        /// Получение погоды по Id
+        /// </summary>
+        /// <param name="id">Идентификатор погоды в БД</param>
+        /// <returns></returns>
+        string GetWeatherById(Guid id);
     }
 }

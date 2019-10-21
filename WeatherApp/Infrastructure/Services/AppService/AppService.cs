@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services.AppService
@@ -28,10 +29,7 @@ namespace WeatherApp.Services.AppService
         /// </summary>
         /// <param name="city">Наименование города по английски</param>
         /// <returns></returns>
-        private City GetCityInfo(string city)
-        {
-            return DbCtx.Cities.FirstOrDefault(c => string.Equals(c.Name.ToLower(),city.ToLower()));
-        }
+        private City GetCityInfo(string city) => DbCtx.Cities.FirstOrDefault(c => c.Name.Equals(city));
 
         /// <summary>
         /// Сохраняем историю погоды в базу
@@ -50,6 +48,13 @@ namespace WeatherApp.Services.AppService
             });
             DbCtx.SaveChanges();
         }
+
+        /// <summary>
+        /// Получение погоды по Id
+        /// </summary>
+        /// <param name="id">Идентификатор погоды в БД</param>
+        /// <returns></returns>
+        public string GetWeatherById(Guid id) => JsonConvert.SerializeObject(DbCtx.Weathers.FirstOrDefault(w => w.WeatherId == id));
 
         /// <summary>
         /// Получение погоды для отображения на фронте

@@ -9,7 +9,7 @@ namespace WeatherApp
             new KeyValuePair<string, string>("clear", "ясно"),
             new KeyValuePair<string, string>("partly-cloudy", "малооблачно"),
             new KeyValuePair<string, string>("cloudy", "облачно с прояснениями"),
-            new KeyValuePair<string, string>("overcast ", "пасмурно"),
+            new KeyValuePair<string, string>("overcast", "пасмурно"),
             new KeyValuePair<string, string>("partly-cloudy-and-light-rain", "небольшой дождь"),
             new KeyValuePair<string, string>("partly-cloudy-and-rain", "дождь"),
             new KeyValuePair<string, string>("overcast-and-rain", "сильный дождь"),

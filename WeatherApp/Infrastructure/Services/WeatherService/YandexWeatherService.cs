@@ -53,13 +53,15 @@ namespace WeatherApp.Services
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Yandex-API-Key", _yandexWeatherConfig.Value.ApiKey);
 
             // Строим URL
-            var builder = new UriBuilder(_yandexWeatherConfig.Value.Url);
-            builder.Port = -1;
-            var query = HttpUtility.ParseQueryString(builder.Query);
-            query["lat"] = city.Lat.ToString();
-            query["lon"] = city.Lon.ToString();
-            builder.Query = query.ToString();
-            string url = builder.ToString();
+            var url = $"{_yandexWeatherConfig.Value.Url}?lat={city.Lat}&lon={city.Lon}".Replace(',', '.');
+            //Можно еще вот так но яндекс не понимает точку преобразованную в безопасную последовательность
+            //var builder = new UriBuilder(_yandexWeatherConfig.Value.Url);
+            //builder.Port = -1;
+            //var query = HttpUtility.ParseQueryString(builder.Query);
+            //query["lat"] = city.Lat.ToString();
+            //query["lon"] = city.Lon.ToString();
+            //builder.Query = query.ToString();
+            //string url = builder.ToString();
 
             // Выполняем запрос
             return await _httpClient.GetAsync(url);

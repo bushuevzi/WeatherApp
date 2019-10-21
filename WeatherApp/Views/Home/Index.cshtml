@@ -17,6 +17,24 @@
         <li><a asp-controller="Home" asp-action="Index" asp-route-id="Kaliningrad">Калининград</a></li>
     </ul>
     
-    @Model
+    @{
+        if (Model != null)
+        {
+            <div>
+                <ul>
+                    <li><span>Температура (°C) - </span><span>@Model.Temp</span></li>
+                    <li><span>Ощущаемая температура (°C) - </span><span>@Model.FeelsLike</span></li>
+                    <li><span>Температура воды (°C) - </span><span>@Model.TempWater</span></li>
+                    <li><span>Код расшифровки погодного описания(в кириллице) - </span><span>@Model.Condition</span></li>
+                    <li><span>Скорость ветра (в м/с) - </span><span>@Model.WindSpeed</span></li>
+                    <li><span>Скорость порывов ветра (в м/с) - </span><span>@Model.WindGust</span></li>
+                    <li><span>Направление ветра(в кириллице) - </span><span>@Model.WindDir</span></li>
+                    <li><span>Давление (в мм рт. ст.) - </span><span>@Model.PressureMm</span></li>
+                    <li><span>Тип осадков.(в кириллице) - </span><span>@Model.PrecType</span></li>
+                </ul>
+                <a asp-controller="Home" asp-action="GetJson" asp-route-id = "@Model.WeatherId">Скачать в формате JSON</a>
+            </div>
+        }
+    }
     
 </div>
