@@ -2,7 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <h1>Погода</h1>
+    <p>Для отображения погоды Пожалуйста выберите соответствующий город:</p>
+</div>
+<div>
+    <ul>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-id="Krasnodar">Краснодар</a></li>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-id="Moscow">Москва</a></li>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-id="Orengurg">Огенбург</a></li>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-id="St.Peretburg">Санкт-Питербург</a></li>
+        <li><a asp-controller="Home" asp-action="Index" asp-route-id="Kaliningrad">Калининград</a></li>
+    </ul>
+    
+    
 </div>
