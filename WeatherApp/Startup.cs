@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WeatherApp.Configurations;
 using WeatherApp.Models;
 using WeatherApp.Services;
 using WeatherApp.Services.AppService;
@@ -27,12 +28,16 @@ namespace WeatherApp
 
             #region Внедрение зависимостей
             services.AddControllersWithViews();
-
             services.AddScoped<IAppService, AppService>();
             services.AddScoped<IWeatherService, YandexWeatherService>();
             // Добавляем сервис контекста БД
             services.AddDbContext<WeatherDbContext>(options =>
                 options.UseSqlServer(connection));
+            
+            services.AddHttpClient<IWeatherService, YandexWeatherService>();
+
+            // Десереализуем конфигурацию для подключения к сервису
+            services.Configure<YandexWeatherConfig>(Configuration.GetSection("YandexWeatherConfig"));
 
             #endregion
         }

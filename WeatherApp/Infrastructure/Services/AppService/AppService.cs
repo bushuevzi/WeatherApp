@@ -1,15 +1,30 @@
-﻿using WeatherApp.Models;
+﻿using System;
+using System.Linq;
+using System.Net.Http;
+using WeatherApp.Models;
 
 namespace WeatherApp.Services.AppService
 {
     /// <summary>
     /// Главный сервис приложения
     /// </summary>
-    public class AppService : IAppService
+    public class AppService : BaseService, IAppService
     {
+        private readonly IWeatherService _weatherService;
+
+        #region Внедрение зависимостей
+        public AppService(WeatherDbContext dbCtx,
+            IWeatherService weatherService)
+        :base(dbCtx)
+        {
+            _weatherService = weatherService;
+        }
+
+        #endregion
+
         private City GetCityInfo(string city)
         {
-            throw new System.NotImplementedException();
+            return DbCtx.Cities.FirstOrDefault(c => string.Equals(c.Name,city, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
@@ -19,6 +34,13 @@ namespace WeatherApp.Services.AppService
         /// <returns></returns>
         public Weather GetWheatherForView(string city)
         {
+            // Получить запрос у стороннего поставщика погоды (например Яндекс)
+
+            // Преобразовать данные к нужному формату для представления
+
+            // Сохраняем запрос в базу
+
+            // Отдаем результат.
             throw new System.NotImplementedException();
         }
     }
