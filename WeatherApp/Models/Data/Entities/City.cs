@@ -1,4 +1,5 @@
-﻿using System.Security.AccessControl;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeatherApp.Models
 {
@@ -7,10 +8,18 @@ namespace WeatherApp.Models
     /// </summary>
     public class City
     {
+        [Key]
+        public Guid CityId { get; set; }
+
         /// <summary>
-        /// Наименование
+        /// Наименование на английском
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Наименование на русском
+        /// </summary>
+        public string NameRu { get; set; }
 
         /// <summary>
         /// Широта

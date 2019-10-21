@@ -5,7 +5,7 @@ namespace WeatherApp.Models
     /// <summary>
     /// Объект содержит информацию о погоде на данный момент
     /// </summary>
-    public class Fact
+    public class WeatherResponce
     {
         /// <summary>
         /// Температура (°C).

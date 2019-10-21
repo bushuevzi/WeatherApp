@@ -1,12 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeatherApp.Models
 {
     /// <summary>
     /// Объект содержит информацию о погоде на данный момент
     /// </summary>
-    public class WeatherForView
+    public class Weather
     {
+        [Key]
+        public Guid WeatherId { get; set; }
+
         /// <summary>
         /// Температура (°C).
         /// </summary>
@@ -50,6 +54,6 @@ namespace WeatherApp.Models
         /// <summary>
         /// Тип осадков
         /// </summary>
-        public int PrecType { get; set; }
+        public string PrecType { get; set; }
     }
 }

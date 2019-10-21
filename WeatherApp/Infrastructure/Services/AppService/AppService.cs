@@ -1,18 +1,25 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using WeatherApp.Models;
+﻿using WeatherApp.Models;
 
 namespace WeatherApp.Services.AppService
 {
     /// <summary>
     /// Главный сервис приложения
     /// </summary>
-    public interface IAppService
+    public class AppService : IAppService
     {
+        private City GetCityInfo(string city)
+        {
+
+        }
+
         /// <summary>
         /// Получение погоды для отображения на фронте
         /// </summary>
         /// <param name="city">Наименование города</param>
         /// <returns></returns>
-        WeatherForView GetWheatherForView(string city);
+        public Weather GetWheatherForView(string city)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

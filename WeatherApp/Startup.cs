@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WeatherApp.Models;
 using WeatherApp.Services;
 using WeatherApp.Services.AppService;
 
@@ -25,12 +22,20 @@ namespace WeatherApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            
+
+            // Строка подключения к БД
+            string connection = Configuration.GetConnectionString("DefaultConnection");
 
             #region Внедрение зависимостей
+            services.AddControllersWithViews();
 
             services.AddScoped<IAppService, AppService>();
             services.AddScoped<IWeatherService, YandexWeatherService>();
+            
+            // Добавляем сервис контекста БД
+            services.AddDbContext<WeatherDbContext>(options =>
+                options.UseSqlServer(connection));
 
             #endregion
         }

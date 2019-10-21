@@ -5,7 +5,7 @@ namespace WeatherApp.Models
     /// <summary>
     /// Ответ на запрос погоды
     /// </summary>
-    public class WeatherJson
+    public class Responce
     {
         /// <summary>
         /// Время сервера в формате Unixtime
@@ -23,6 +23,6 @@ namespace WeatherApp.Models
         /// Объект фактической информации о погоде
         /// </summary>
         [JsonProperty(PropertyName = "fact")]
-        public Fact Fact { get; set; }
+        public WeatherResponce Fact { get; set; }
     }
 }
