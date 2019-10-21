@@ -80,7 +80,7 @@ namespace WeatherApp.Migrations
                     b.ToTable("Weathers");
                 });
 
-            modelBuilder.Entity("WeatherApp.Models.WeatherHystory", b =>
+            modelBuilder.Entity("WeatherApp.Models.WeatherHistory", b =>
                 {
                     b.Property<Guid>("WeatherHystoryId")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace WeatherApp.Migrations
                     b.ToTable("WeatherHystories");
                 });
 
-            modelBuilder.Entity("WeatherApp.Models.WeatherHystory", b =>
+            modelBuilder.Entity("WeatherApp.Models.WeatherHistory", b =>
                 {
                     b.HasOne("WeatherApp.Models.City", "City")
                         .WithMany()

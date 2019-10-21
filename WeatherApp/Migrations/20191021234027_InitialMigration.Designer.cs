@@ -10,7 +10,7 @@ using WeatherApp.Models;
 namespace WeatherApp.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20191021190004_InitialMigration")]
+    [Migration("20191021234027_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,7 +82,7 @@ namespace WeatherApp.Migrations
                     b.ToTable("Weathers");
                 });
 
-            modelBuilder.Entity("WeatherApp.Models.WeatherHystory", b =>
+            modelBuilder.Entity("WeatherApp.Models.WeatherHistory", b =>
                 {
                     b.Property<Guid>("WeatherHystoryId")
                         .ValueGeneratedOnAdd()
@@ -106,7 +106,7 @@ namespace WeatherApp.Migrations
                     b.ToTable("WeatherHystories");
                 });
 
-            modelBuilder.Entity("WeatherApp.Models.WeatherHystory", b =>
+            modelBuilder.Entity("WeatherApp.Models.WeatherHistory", b =>
                 {
                     b.HasOne("WeatherApp.Models.City", "City")
                         .WithMany()
