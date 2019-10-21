@@ -54,7 +54,7 @@ namespace WeatherApp.Services.AppService
         /// </summary>
         /// <param name="id">Идентификатор погоды в БД</param>
         /// <returns></returns>
-        public string GetWeatherById(Guid id) => JsonConvert.SerializeObject(DbCtx.Weathers.FirstOrDefault(w => w.WeatherId == id));
+        public Weather GetWeatherById(Guid id) => DbCtx.Weathers.FirstOrDefault(w => w.WeatherId == id);
 
         /// <summary>
         /// Получение погоды для отображения на фронте

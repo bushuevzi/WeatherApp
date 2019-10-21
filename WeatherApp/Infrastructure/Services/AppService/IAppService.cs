@@ -21,6 +21,6 @@ namespace WeatherApp.Services.AppService
         /// </summary>
         /// <param name="id">Идентификатор погоды в БД</param>
         /// <returns></returns>
-        string GetWeatherById(Guid id);
+        Weather GetWeatherById(Guid id);
     }
 }

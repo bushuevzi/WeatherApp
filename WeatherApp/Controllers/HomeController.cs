@@ -34,18 +34,7 @@ namespace WeatherApp.Controllers
             return View("Index", weather);
         }
 
-        public IActionResult GetJson(Guid id)
-        {
-            // Создаем поток чтобы потом записать его в файл который мы передадим во фронт
-            MemoryStream memoryStream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(memoryStream);
-            
-            // Записываем в поток нашу погоду (сейчас она уже сериализованна в строку в формате JSON)
-            writer.Write(_appService.GetWeatherById(id));
-            memoryStream.Position = 0;
-
-            return File(memoryStream,"application/json");
-        }
+        public IActionResult GetJson(Guid id) => Json(_appService.GetWeatherById(id));
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
