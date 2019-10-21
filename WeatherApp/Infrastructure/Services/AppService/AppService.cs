@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using WeatherApp.Models;
 
 namespace WeatherApp.Services.AppService
@@ -22,9 +23,32 @@ namespace WeatherApp.Services.AppService
 
         #endregion
 
+        /// <summary>
+        /// Получение города из базы
+        /// </summary>
+        /// <param name="city">Наименование города по английски</param>
+        /// <returns></returns>
         private City GetCityInfo(string city)
         {
-            return DbCtx.Cities.FirstOrDefault(c => string.Equals(c.Name,city, StringComparison.InvariantCultureIgnoreCase));
+            return DbCtx.Cities.FirstOrDefault(c => string.Equals(c.Name.ToLower(),city.ToLower()));
+        }
+
+        /// <summary>
+        /// Сохраняем историю погоды в базу
+        /// </summary>
+        /// <param name="city">Информация о городе</param>
+        /// <param name="weather">Погода</param>
+        /// <param name="timestamp">Время запроса в формате Unix timestamp</param>
+        private void SaveWeatherHistory(City city, Weather weather, double timestamp)
+        {
+            DbCtx.WeatherHystories.Add(new WeatherHistory
+            {
+                City = city,
+                Weather = weather,
+                // Получаем время из Unix timestamp
+                WeatherDateTime = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddSeconds(timestamp)
+            });
+            DbCtx.SaveChanges();
         }
 
         /// <summary>
@@ -32,16 +56,34 @@ namespace WeatherApp.Services.AppService
         /// </summary>
         /// <param name="city">Наименование города</param>
         /// <returns></returns>
-        public Weather GetWheatherForView(string city)
+        public async Task<Weather> GetWheatherForView(string city)
         {
-            // Получить запрос у стороннего поставщика погоды (например Яндекс)
+            // Получить информацию о городе
+            var cityInfo = GetCityInfo(city);
 
-            // Преобразовать данные к нужному формату для представления
+            // Получить погоду у стороннего поставщика погоды (например Яндекс)
+            var responce = await _weatherService.RequestWeather(cityInfo);
+            var weatherResponce = responce.Fact;
+
+            // Преобразовать данные к нужному формату для представления (подстановка в некоторые значения кирилицы)
+            var weather = new Weather
+            {
+                Temp = weatherResponce.Temp,
+                FeelsLike = weatherResponce.FeelsLike,
+                TempWater = weatherResponce.TempWater,
+                Condition = Dictionaries.Conditions[weatherResponce.Condition],
+                WindSpeed = weatherResponce.WindSpeed,
+                WindGust = weatherResponce.WindGust,
+                WindDir = Dictionaries.WindDirection[weatherResponce.WindDir],
+                PressureMm = weatherResponce.PressureMm,
+                PrecType = Dictionaries.PrecipitationType[weatherResponce.PrecType]
+            };
 
             // Сохраняем запрос в базу
+            SaveWeatherHistory(cityInfo, weather, responce.Now);
 
             // Отдаем результат.
-            throw new System.NotImplementedException();
+            return weather;
         }
     }
 }

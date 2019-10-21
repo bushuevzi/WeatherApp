@@ -13,7 +13,7 @@ namespace WeatherApp.Models
         #region Таблицы
         public DbSet<City> Cities { get; set; }
         public DbSet<Weather> Weathers { get; set; }
-        public DbSet<WeatherHystory> WeatherHystories { get; set; } 
+        public DbSet<WeatherHistory> WeatherHystories { get; set; } 
         #endregion
     }
 }

@@ -29,7 +29,6 @@ namespace WeatherApp
             #region Внедрение зависимостей
             services.AddControllersWithViews();
             services.AddScoped<IAppService, AppService>();
-            services.AddScoped<IWeatherService, YandexWeatherService>();
             // Добавляем сервис контекста БД
             services.AddDbContext<WeatherDbContext>(options =>
                 options.UseSqlServer(connection));

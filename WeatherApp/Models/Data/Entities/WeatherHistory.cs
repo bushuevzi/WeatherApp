@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WeatherApp.Models
 {
-    public class WeatherHystory
+    public class WeatherHistory
     {
         [Key]
         public Guid WeatherHystoryId { get; set; }

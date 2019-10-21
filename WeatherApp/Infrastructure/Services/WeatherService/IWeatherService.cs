@@ -1,4 +1,5 @@
-﻿using WeatherApp.Models;
+﻿using System.Threading.Tasks;
+using WeatherApp.Models;
 
 namespace WeatherApp.Services
 {
@@ -12,6 +13,6 @@ namespace WeatherApp.Services
         /// </summary>
         /// <param name="city">Информация о городе</param>
         /// <returns></returns>
-        Responce RequestWeather(City city);
+        Task<Responce> RequestWeather(City city);
     }
 }

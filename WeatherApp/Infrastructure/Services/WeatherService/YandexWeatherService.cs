@@ -32,27 +32,25 @@ namespace WeatherApp.Services
         /// </summary>
         /// <param name="city">Информация о городе</param>
         /// <returns></returns>
-        public Responce RequestWeather(City city)
+        public async Task<Responce> RequestWeather(City city)
         {
-            // Отправляем запрос
-            var responceContent = SendRequestAsync(city).Result.Content.ReadAsStringAsync().Result;
+            // Отправляем запрос и получаем результат асинхронно
+            var responce = await SendRequestAsync(city);
+            var responceContent = await responce.Content.ReadAsStringAsync();
 
             // Получаем и десериализуем запрос
-            var result = JsonConvert.DeserializeObject<Responce>(responceContent);
-
-            return result;
+            return JsonConvert.DeserializeObject<Responce>(responceContent);
         }
 
         /// <summary>
         /// Метод отправки запроса в Яндекс погода
         /// </summary>
-        /// <param name="request">Тело запроса</param>
-        /// <param name="apiKey">ApiKey</param>
+        /// <param name="city">Информация о городе</param>
         /// <returns></returns>
         private async Task<HttpResponseMessage> SendRequestAsync(City city)
         {
             // Добавляем заголовок авторизации
-            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Yandex-API-Key", _yandexWeatherConfig.Value.Url);
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("X-Yandex-API-Key", _yandexWeatherConfig.Value.ApiKey);
 
             // Строим URL
             var builder = new UriBuilder(_yandexWeatherConfig.Value.Url);
@@ -64,9 +62,7 @@ namespace WeatherApp.Services
             string url = builder.ToString();
 
             // Выполняем запрос
-            var response = await _httpClient.GetAsync(url);
-
-            return response;
+            return await _httpClient.GetAsync(url);
         }
     }
 }
