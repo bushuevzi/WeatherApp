@@ -14,7 +14,7 @@ namespace WeatherApp.Services
         /// <returns></returns>
         public Responce RequestWeather(City city)
         {
-            
+            throw new System.NotImplementedException();
         }
     }
 }

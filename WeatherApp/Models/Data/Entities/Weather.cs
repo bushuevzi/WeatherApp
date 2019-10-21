@@ -14,17 +14,17 @@ namespace WeatherApp.Models
         /// <summary>
         /// Температура (°C).
         /// </summary>
-        public decimal Temp { get; set; }
+        public double Temp { get; set; }
 
         /// <summary>
         /// Ощущаемая температура (°C).	
         /// </summary>
-        public decimal FeelsLike { get; set; }
+        public double FeelsLike { get; set; }
 
         /// <summary>
         /// Температура воды (°C).Если в городе нет водоема, вернуть null	
         /// </summary>
-        public decimal? TempWater { get; set; }
+        public double? TempWater { get; set; }
 
         /// <summary>
         /// Код расшифровки погодного описания
@@ -34,12 +34,12 @@ namespace WeatherApp.Models
         /// <summary>
         /// Скорость ветра (в м/с).	
         /// </summary>
-        public decimal WindSpeed { get; set; }
+        public double WindSpeed { get; set; }
 
         /// <summary>
         /// Скорость порывов ветра (в м/с).	
         /// </summary>
-        public decimal WindGust { get; set; }
+        public double WindGust { get; set; }
 
         /// <summary>
         /// Направление ветра
@@ -49,7 +49,7 @@ namespace WeatherApp.Models
         /// <summary>
         /// Давление (в мм рт. ст.).	
         /// </summary>
-        public decimal PressureMm { get; set; }
+        public double PressureMm { get; set; }
 
         /// <summary>
         /// Тип осадков

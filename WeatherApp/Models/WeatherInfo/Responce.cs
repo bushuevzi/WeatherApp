@@ -11,7 +11,7 @@ namespace WeatherApp.Models
         /// Время сервера в формате Unixtime
         /// </summary>
         [JsonProperty(PropertyName = "now")]
-        public decimal Now { get; set; }
+        public double Now { get; set; }
 
         /// <summary>
         /// Время сервера в UTC.

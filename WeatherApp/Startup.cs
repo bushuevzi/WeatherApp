@@ -22,8 +22,6 @@ namespace WeatherApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-
             // Строка подключения к БД
             string connection = Configuration.GetConnectionString("DefaultConnection");
 
@@ -32,7 +30,6 @@ namespace WeatherApp
 
             services.AddScoped<IAppService, AppService>();
             services.AddScoped<IWeatherService, YandexWeatherService>();
-            
             // Добавляем сервис контекста БД
             services.AddDbContext<WeatherDbContext>(options =>
                 options.UseSqlServer(connection));
@@ -66,6 +63,8 @@ namespace WeatherApp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedData.EnsurePopulated(app);
         }
     }
 }

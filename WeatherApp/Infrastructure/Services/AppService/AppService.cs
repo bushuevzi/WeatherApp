@@ -9,7 +9,7 @@ namespace WeatherApp.Services.AppService
     {
         private City GetCityInfo(string city)
         {
-
+            throw new System.NotImplementedException();
         }
 
         /// <summary>

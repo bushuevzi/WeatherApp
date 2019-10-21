@@ -24,11 +24,11 @@ namespace WeatherApp.Models
         /// <summary>
         /// Широта
         /// </summary>
-        public decimal Lat { get; set; }
+        public double Lat { get; set; }
 
         /// <summary>
         /// Долгота
         /// </summary>
-        public decimal Lon { get; set; }
+        public double Lon { get; set; }
     }
 }
