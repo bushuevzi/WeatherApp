@@ -12,13 +12,10 @@ namespace WeatherApp.Controllers
     public class HomeController : Controller
     {
         #region Внедрение зависимостей
-        private readonly ILogger<HomeController> _logger;
         private readonly IAppService _appService;
 
-        public HomeController(ILogger<HomeController> logger,
-            IAppService appService)
+        public HomeController(IAppService appService)
         {
-            _logger = logger;
             _appService = appService;
         } 
         #endregion
@@ -34,6 +31,11 @@ namespace WeatherApp.Controllers
             return View("Index", weather);
         }
 
+        /// <summary>
+        /// Получение погоды из из базы по ее id
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <returns></returns>
         public IActionResult GetJson(Guid id) => Json(_appService.GetWeatherById(id));
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
