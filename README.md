@@ -23,7 +23,7 @@
 &#x1F4D7;
 ### Использование:
 1. Get запрос отправлять на **http://<hostname:hostport>/api/weather?city=Krasnodar**
-query параметр - city может принимать значения [Krasnodar, Moscow, Orengurg, St.Peretburg, Kaliningrad]
+query параметр - _city_ может принимать значения _[Krasnodar, Moscow, Orengurg, St.Peretburg, Kaliningrad]_
 Пример запроса - https://localhost:5001/api/weather?city=Krasnodar
 
 2. Для удобства реализован Web-интерфейс открывающийся по умолчанию
